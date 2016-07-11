@@ -126,3 +126,18 @@ For transparency into our release cycle and in striving to maintain backward com
 Code and documentation released under [the MIT license](https://github.com/joni2back/angular-filemanager/blob/master/LICENSE).
 
 
+### modifications by Alex
+Test application is located in app folder to run it you need to:
+1. npm install
+2. bower install 
+3. DATA_DIR='/data/fm' node  node_modules/angular-filemanager-nodejs-bridge/server.js 
+ where DATA_DIR variable the path to the folder where all files will be located
+4. gulp serve 
+  it will run a server on http://localhost:3000
+  
+Current modifications are:
+  src/controllers/main.js
+
+To modify your own app you need to copy app/styles.css and set flag {noModals: true} in the config section of Angular app (example is in app/js/app.js)   
+  
+  

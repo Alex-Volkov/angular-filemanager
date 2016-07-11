@@ -9,6 +9,8 @@ var concat = require('gulp-concat');
 var eslint = require('gulp-eslint');
 var del = require('del');
 var path = require('path');
+var serve = require('gulp-serve');
+
 
 // Vars
 var src = 'src/';
@@ -70,6 +72,7 @@ gulp.task('lint', function () {
     .pipe(eslint.format())
     .pipe(eslint.failOnError());
 });
+gulp.task('serve', serve('.'));
 
 gulp.task('default', ['concat-uglify-js', 'minify-css']);
 gulp.task('build', ['clean', 'lint', 'default']);
