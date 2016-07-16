@@ -1,0 +1,56 @@
+<div id="fileManagerApp">
+    <angular-filemanager></angular-filemanager>
+</div>
+<script type="text/javascript">
+    var element = document.querySelector('#fileManagerApp');
+    console.log(element);
+    angular.element(element).ready(function () {
+        var app = angular.module('FileManagerApp')
+                .config(['fileManagerConfigProvider', function (config) {
+                    var defaults = config.$get();
+                    config.set({
+                        appName: 'angular-filemanager',
+                        pickCallback: function (item) {
+                            var msg = 'Picked %s "%s" for external use'
+                                    .replace('%s', item.type)
+                                    .replace('%s', item.fullPath());
+                            window.alert(msg);
+                        },
+
+                        allowedActions: angular.extend(defaults.allowedActions, {
+                            pickFiles: false,
+                            pickFolders: false,
+                        }),
+                    });
+                    config.set({
+                        listUrl: 'http://localhost:5000/list',
+                        downloadFileUrl: 'http://localhost:5000/download',
+                        uploadUrl: 'http://localhost:5000/upload',
+                        removeUrl: 'http://localhost:5000/remove',
+                        createFolderUrl: 'http://localhost:5000/createFolder',
+                        renameUrl: 'http://localhost:5000/rename',
+                        copyUrl: 'http://localhost:5000/copy'
+                    });
+                    config.set({noModals: true})
+                }]);
+
+        angular.bootstrap(element, ['FileManagerApp']);
+    });
+
+    /*
+     angular.element(element).ready(function() {
+     console.debug('YAHOW');
+
+     var app = angular.module('myapp', []);
+
+     app.directive('customForm', function() {
+     return {
+     restrict: 'A',
+     template: 'hello world'
+     };
+     });
+
+     angular.bootstrap(element, ['myapp']);
+     });
+     */
+</script>
