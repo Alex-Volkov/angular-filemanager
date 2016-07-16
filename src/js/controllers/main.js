@@ -358,8 +358,7 @@
 			$scope.fileNavigator.refresh();
 
 			//	my modifications
-			if (!!$scope.config.noModals) {
-				console.log('no modals');
+			if (!$scope.config.noModals) {
 				$scope.modal = function (id, hide, returnElement) {
 					var $elem = $('#' + id);
 					$elem.removeClass('modal').addClass('no-modal');
