@@ -360,6 +360,7 @@
 
 			//	my modifications
 			if (!!$scope.config.noModals) {
+				console.log('no modals');
 				$scope.modal = function (id, hide, returnElement) {
 					var $elem = $('#' + id);
 					$elem.removeClass('modal').addClass('no-modal');
@@ -378,11 +379,12 @@
 							.off('click', '.btn.btn-primary')
 							.off('click', '.close')
 							.on('click', '.btn.btn-default', function () {
-								console.log('hide');
 								hideElem();
+								return false;
 							})
 							.on('click', '.btn.btn-primary, .close', function () {
 								hideElem();
+								return false;
 							});
 					} else {
 						hideElem();
