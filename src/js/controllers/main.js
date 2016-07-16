@@ -166,7 +166,6 @@
 
 			$scope.modal = function (id, hide, returnElement) {
 				var element = $('#' + id);
-				console.log(element);
 				element.modal(hide ? 'hide' : 'show');
 				$scope.apiMiddleware.apiHandler.error = '';
 				$scope.apiMiddleware.apiHandler.asyncSuccess = false;
@@ -365,12 +364,12 @@
 					var $elem = $('#' + id);
 					$elem.removeClass('modal').addClass('no-modal');
 					$elem.find('.btn.btn-primary').attr('ng-submit', $elem.find('form').attr('ng-submit'));
-	
-	
+
+
 					function hideElem() {
 						$elem.removeClass('show-me');
 					}
-	
+
 					if (!hide) {
 						// since we remove Bootstrap modal functionality, i'll use jQuery for that purpose
 						$elem
