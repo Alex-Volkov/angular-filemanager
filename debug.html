@@ -14,9 +14,13 @@
         </div>
     </div>
 </div>
-<button type="button" class="btn btn-primary" data-toggle="modal" href="http://localhost:5001/index/testUploadModal"
-        data-target="#ajaxModalTwo">Test Upload
+<!--<button type="button" class="btn btn-primary" data-toggle="modal" href="http://localhost:5001/index/testUploadModal"-->
+        <!--data-target1="#ajaxModalTwo">Test Upload-->
+<!--</button>-->
+<button type="button" class="btn btn-primary"
+        >Test Upload
 </button>
+
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/angular-translate/angular-translate.min.js"></script>
@@ -35,6 +39,18 @@
 <script src="src/js/providers/translations.js"></script>
 <script src="src/js/controllers/main.js"></script>
 <script src="src/js/controllers/selector-controller.js"></script>
+<script>
+    $('button').on('click', function () {
+        var $modalContainer = $('#ajaxModalTwo .modal-content');
+        $modalContainer.load('http://localhost:5001/index/testUploadModal', function () {
+            var $modal = $('#ajaxModalTwo');
+            $modal.modal('show');
+            $modal.on('hide.bs.modal', function(e){
+                $modalContainer.empty();
+            });
+        })
 
+    })
+</script>
 </body>
 </html>
