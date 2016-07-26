@@ -376,13 +376,21 @@
 							.off('click', '.btn.btn-default')
 							.off('click', '.btn.btn-primary')
 							.off('click', '.close')
+							// for the cancel button
 							.on('click', '.btn.btn-default', function () {
 								hideElem();
+								// return false here is to prevent closing of the parent modal
 								return false;
 							})
+							// for the close button with cross icon
+							.on('click', '.close', function () {
+								hideElem();
+								// return false here is to prevent closing of the parent modal
+								return false;
+							})
+							// for the primary action button
 							.on('click', '.btn.btn-primary, .close', function () {
 								hideElem();
-								return false;
 							});
 					} else {
 						hideElem();
