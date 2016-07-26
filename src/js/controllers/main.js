@@ -315,6 +315,7 @@
 					return $scope.apiMiddleware.apiHandler.error = $translate.instant('error_invalid_filename');
 				}
 				$scope.apiMiddleware.createFolder(item).then(function () {
+					console.log('create success');
 					$scope.fileNavigator.refresh();
 					$scope.modal('newfolder', true);
 				});
@@ -334,7 +335,9 @@
 					$scope.fileNavigator.refresh();
 					$scope.uploadFileList = [];
 					$scope.modal('uploadfile', true);
+					console.log('upld');
 				}, function (data) {
+					console.log(data);
 					var errorMsg = data.result && data.result.error || $translate.instant('error_uploading_files');
 					$scope.apiMiddleware.apiHandler.error = errorMsg;
 				});
@@ -390,7 +393,9 @@
 							})
 							// for the primary action button
 							.on('click', '.btn.btn-primary, .close', function () {
-								hideElem();
+								if(!!hide){
+									hideElem();
+								}
 							});
 					} else {
 						hideElem();
