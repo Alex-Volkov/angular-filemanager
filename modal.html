@@ -6,7 +6,8 @@
     console.log(element);
     angular.element(element).ready(function () {
         var app = angular.module('FileManagerApp')
-                .config(['fileManagerConfigProvider', function (config) {
+                .config(['fileManagerConfigProvider', '$locationProvider', function (config, $locationProvider) {
+                    $locationProvider.html5Mode({enabled: true, requireBase: false})
                     var defaults = config.$get();
                     config.set({
                         appName: 'angular-filemanager',
