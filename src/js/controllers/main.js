@@ -197,12 +197,16 @@
 
 			$scope.download = function () {
 				var item = $scope.singleSelection();
+				console.log(item);
+				console.log($scope.fileList);
+				// return false;
 				if ($scope.selectionHas('dir')) {
 					return;
 				}
 				if (item) {
 					return $scope.apiMiddleware.download(item);
 				}
+
 				return $scope.apiMiddleware.downloadMultiple($scope.temps);
 			};
 

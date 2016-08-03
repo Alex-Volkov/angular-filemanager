@@ -81,13 +81,15 @@
             if (item.isFolder()) {
                 return;
             }
-            
+            // adding item id
+            var itemId = item.model && item.model.id;
             return this.apiHandler.download(
                 fileManagerConfig.downloadFileUrl, 
                 itemPath,
                 toFilename,
                 fileManagerConfig.downloadFilesByAjax,
-                forceNewWindow
+                forceNewWindow,
+                itemId
             );
         };
 

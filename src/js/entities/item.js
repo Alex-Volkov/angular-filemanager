@@ -17,6 +17,11 @@
                     return ('/' + path.join('/') + '/' + this.name).replace(/\/\//, '/');
                 }
             };
+            // adding a model id to the rawModel
+
+            if(model && model.id){
+               rawModel.id = model.id
+            }
 
             this.error = '';
             this.processing = false;
