@@ -81,7 +81,7 @@
 
         ApiMiddleware.prototype.getUrl = function(item) {
             var itemPath = this.getFilePath(item);
-            return this.apiHandler.getUrl(fileManagerConfig.downloadFileUrl, itemPath);
+            return this.apiHandler.getUrl(fileManagerConfig.downloadFileUrl, itemPath, item.model.id);
         };
 
         ApiMiddleware.prototype.download = function(item, forceNewWindow) {
