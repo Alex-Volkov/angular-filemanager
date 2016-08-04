@@ -13,7 +13,15 @@
 
         ApiMiddleware.prototype.getFileList = function(files) {
             return (files || []).map(function(file) {
-                return file && file.model.fullPath();
+				if(!!file && file.model.id){
+					return {
+						id:file.model.id,
+						filePath: file && file.model.fullPath()
+					}
+				}else{
+                	return file && file.model.fullPath();
+
+				}
             });
         };
 
@@ -38,6 +46,9 @@
 
         ApiMiddleware.prototype.remove = function(files) {
             var items = this.getFileList(files);
+            console.log(items);
+
+            // return false;
             return this.apiHandler.remove(fileManagerConfig.removeUrl, items);
         };
 
