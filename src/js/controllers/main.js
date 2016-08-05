@@ -369,6 +369,11 @@
 			if (!$scope.config.noModals) {
 				$scope.modal = function (id, hide, returnElement) {
 					var $elem = $('#' + id);
+					// native JS part
+					// var $elem2 = document.getElementById(id);
+					// var newClasses = $elem2.getAttribute('class').replace('modal', 'no-modal');
+					// $elem2.setAttribute('class', newClasses);
+
 					$elem.removeClass('modal').addClass('no-modal');
 					$elem.find('.btn.btn-primary').attr('ng-submit', $elem.find('form').attr('ng-submit'));
 
