@@ -196,7 +196,7 @@
             return deferred.promise;
         };
 
-        ApiHandler.prototype.rename = function(apiUrl, itemPath, newPath) {
+        ApiHandler.prototype.rename = function(apiUrl, itemPath, newPath, itemId) {
             var self = this;
             var deferred = $q.defer();
             var data = {
@@ -204,6 +204,9 @@
                 item: itemPath,
                 newItemPath: newPath
             };
+            if(!!itemId){
+                data.itemid = itemId;
+            }
             self.inprocess = true;
             self.error = '';
             $http.post(apiUrl, data).success(function(data, code) {
