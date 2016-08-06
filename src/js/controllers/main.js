@@ -357,45 +357,55 @@
         $scope.fileNavigator.refresh();
 
         // No modal modifications
+            // native JS modifications for 'no-modal' functionality, we need to put functions outside of $scope.modal to be
+            //	able to remove their listeners
+        var $elem;
+        function onDefaultClick(evt){
+            hideElem();
+            evt.stopPropagation();
+        }
+        function onPrimaryClick(){
+            if(!!this.hide){
+                hideElem();
+            }
+        }
+        function hideElem() {
+            removeClass($elem, 'show-me');
+        }
+        function removeClass(elem, className){
+            var classes = elem.getAttribute('class').split(' ');
+            if(classes.indexOf(className) != -1){
+                classes.splice(classes.indexOf(className), 1);
+            }
+            elem.setAttribute('class', classes.join(' '));
+        }
+        function addClass(elem, className){
+            var classes = elem.getAttribute('class').split(' ');
+            if(classes.indexOf(className) == -1){
+                classes.push(className)
+            }
+            elem.setAttribute('class', classes.join(' '));
+        }
         if ($scope.config.noModals == true) {
             $scope.modal = function (id, hide, returnElement) {
-                var $elem = $('#' + id);
-                // native JS part
-                // var $elem2 = document.getElementById(id);
-                // var newClasses = $elem2.getAttribute('class').replace('modal', 'no-modal');
-                // $elem2.setAttribute('class', newClasses);
-                $elem.removeClass('modal').addClass('afm-hide-modal');
-                $elem.find('.btn.btn-primary').attr('ng-submit', $elem.find('form').attr('ng-submit'));
-
-                function hideElem() {
-                    $elem.removeClass('afm-show-modal');
-                }
-
+                $elem = document.getElementById(id);
+                this.hide = hide;
+                removeClass($elem, 'modal');
+                addClass($elem, 'no-modal');
+                $elem.querySelector('.btn.btn-primary')
+                    .setAttribute('ng-submit', $elem.querySelector('form').getAttribute('ng-submit'));
                 if (!hide) {
-                    // since we remove Bootstrap modal functionality, i'll use jQuery for that purpose
-                    $elem
-                        .addClass('afm-show-modal')
-                        .off('click', '.btn.btn-default')
-                        .off('click', '.btn.btn-primary')
-                        .off('click', '.close')
-                        // for the cancel button
-                        .on('click', '.btn.btn-default', function () {
-                            hideElem();
-                            // return false here is to prevent closing of the parent modal
-                            return false;
-                        })
-                        // for the close button with cross icon
-                        .on('click', '.close', function () {
-                            hideElem();
-                            // return false here is to prevent closing of the parent modal
-                            return false;
-                        })
-                        // for the primary action button
-                        .on('click', '.btn.btn-primary, .close', function () {
-                            if(!!hide){
-                                hideElem();
-                            }
-                        });
+                    addClass($elem, 'show-me');
+                    var btnDefault = $elem.querySelector('.btn.btn-default');
+
+                    btnDefault.removeEventListener('click', onDefaultClick, false);
+                    $elem.querySelector('.btn.btn-primary').removeEventListener('click', onPrimaryClick.bind(this), false);
+                    $elem.querySelector('.close').removeEventListener('click', onDefaultClick, false);
+
+                    btnDefault.addEventListener('click', onDefaultClick, false);
+                    $elem.querySelector('.btn.btn-primary').addEventListener('click', onPrimaryClick.bind(this), false);
+                    $elem.querySelector('.close').addEventListener('click', onDefaultClick, false);
+
                 } else {
                     hideElem();
                 }
