@@ -1,9 +1,9 @@
-.no-modal{
+.afm-hide-modal{
     position: absolute;
     top: 0;
     width:100%;
     display: none;
 }
-.show-me{
+.afm-show-modal{
     display: block;
 }
