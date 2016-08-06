@@ -27,6 +27,6 @@ angular
 		});
 
 		// this is how we override modal functionality
-		// config.set({noModals: true})
+		config.set({noModals: true})
 	}]);
 
